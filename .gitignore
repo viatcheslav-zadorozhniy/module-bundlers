@@ -1,0 +1,4 @@
+node_modules
+dist
+dist-rollup
+dist-browserify
