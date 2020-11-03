@@ -1,5 +1,5 @@
 import { Seq } from 'immutable';
-import { qwe, sum } from './utils';
+import { unusedObject, sum } from './utils';
 import './style.css';
 
 const oddSquares = Seq([ 1, 2, 3, 4, 5, 6, 7, 8 ])

@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const path = require('path');
 
 module.exports = {
   entry: {
@@ -10,6 +11,7 @@ module.exports = {
   },
   output: {
     filename: '[name].[chunkhash].bundle.js',
+    path: path.resolve(__dirname, 'dist-webpack'),
   },
   resolve: {
     extensions: ['.ts', '.js'],
@@ -39,7 +41,6 @@ module.exports = {
     rules: [
       {
         test: /\.ts$/,
-        // use: 'ts-loader',
         use: [
           {
             loader: 'ts-loader',
@@ -54,7 +55,17 @@ module.exports = {
         test: /\.css$/i,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader'
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  ['autoprefixer', {}]
+                ]
+              }
+            }
+          },
         ],
       },
     ],
