@@ -7,29 +7,28 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    main: './src/main.ts',
+    main: './apps/ts-css-lazy/main.ts',
   },
   output: {
     filename: '[name].[chunkhash].bundle.js',
     path: path.resolve(__dirname, 'dist-webpack'),
   },
-  resolve: {
+  resolve: { // Add support for .ts files when resolve modules w/o an extension (not supported out of the box)
     extensions: ['.ts', '.js'],
   },
   optimization: {
     runtimeChunk: 'single',
     minimizer: [
-      new TerserPlugin({
+      new TerserPlugin({ // Minify JavaScript
         cache: true,
         parallel: true,
-        // sourceMap: true, // Must be set to true if using source-maps in production
         terserOptions: {}
       }),
       new OptimizeCSSAssetsPlugin({}),
     ],
     splitChunks: {
       cacheGroups: {
-        vendors: {
+        vendors: { // Move an imports from the node_modules directory into separate chunk
           test: /[\\/]node_modules[\\/]/,
           name: 'vendors',
           chunks: 'all',
@@ -39,7 +38,7 @@ module.exports = {
   },
   module: {
     rules: [
-      {
+      { // Transpile TypeScript into JavaScript
         test: /\.ts$/,
         use: [
           {
@@ -51,7 +50,7 @@ module.exports = {
         ],
         exclude: /node_modules/,
       },
-      {
+      { // Handle CSS files - load, parse, add CSS vendor prefixes
         test: /\.css$/i,
         use: [
           MiniCssExtractPlugin.loader,
@@ -71,12 +70,12 @@ module.exports = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({
+    new CleanWebpackPlugin(), // Clean dist directory
+    new MiniCssExtractPlugin({ // Extract CSS into separate file
       filename: '[name].[chunkhash].css',
     }),
-    new HtmlWebpackPlugin({
-      template: './src/index.html',
+    new HtmlWebpackPlugin({ // Generate an HTML file with injected CSS/JavaScript
+      template: './apps/ts-css-lazy/index.html',
       minify: false,
     }),
   ],
