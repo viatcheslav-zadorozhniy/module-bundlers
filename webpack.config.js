@@ -6,11 +6,12 @@ const TerserPlugin = require('terser-webpack-plugin');
 const path = require('path');
 
 module.exports = {
+  mode: 'production',
   entry: {
     main: './apps/ts-css-lazy/main.ts',
   },
   output: {
-    filename: '[name].[chunkhash].bundle.js',
+    filename: '[name].[contenthash].bundle.js',
     path: path.resolve(__dirname, 'dist-webpack'),
   },
   resolve: { // Add support for .ts files when resolve modules w/o an extension (not supported out of the box)
@@ -20,20 +21,13 @@ module.exports = {
     runtimeChunk: 'single',
     minimizer: [
       new TerserPlugin({ // Minify JavaScript
-        cache: true,
         parallel: true,
         terserOptions: {}
       }),
       new OptimizeCSSAssetsPlugin({}),
     ],
     splitChunks: {
-      cacheGroups: {
-        vendors: { // Move an imports from the node_modules directory into separate chunk
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'all',
-        }
-      }
+      chunks: 'all'
     }
   },
   module: {
@@ -72,7 +66,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(), // Clean dist directory
     new MiniCssExtractPlugin({ // Extract CSS into separate file
-      filename: '[name].[chunkhash].css',
+      filename: '[name].[contenthash].css',
     }),
     new HtmlWebpackPlugin({ // Generate an HTML file with injected CSS/JavaScript
       template: './apps/ts-css-lazy/index.html',
