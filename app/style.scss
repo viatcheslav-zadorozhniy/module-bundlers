@@ -1,0 +1,16 @@
+$placeholder-color: gray;
+
+div {
+  margin-bottom: .5rem;
+}
+
+button {
+  background-image: image-set(
+    linear-gradient(blue, white) 1x,
+    linear-gradient(blue, green) 2x
+  );
+}
+
+::placeholder {
+  color: $placeholder-color;
+}
