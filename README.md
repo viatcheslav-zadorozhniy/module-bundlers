@@ -85,7 +85,7 @@ Typical config has the following properties:
 ## Demo
 
 ### Details
-An [example app](./app/main.ts) has close to the real-world infrastructure:
+An [example app](./app/main.ts) is close to the real-world infrastructure:
 - written in TypeScript;
 - imports 3rd party libraries;
 - has unused imports (to test [tree shaking](https://en.wikipedia.org/wiki/Tree_shaking));
