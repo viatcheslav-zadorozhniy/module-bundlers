@@ -8,7 +8,7 @@ const { sassPlugin } = require('esbuild-sass-plugin');
 
 const htmlTemplate = readFileSync('./app/index.html', 'utf8');
 const bundleNameFormat = '[name].[hash].bundle';
-const distDir = 'dist-esbuild';
+const distDir = 'dist/esbuild-app';
 
 // Clean dist directory.
 rimraf.sync(distDir);

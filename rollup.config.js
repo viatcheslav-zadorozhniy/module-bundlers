@@ -9,7 +9,7 @@ const autoprefixer = require('autoprefixer');
 const fs = require('fs');
 const htmlTemplate = fs.readFileSync('./app/index.html', 'utf8');
 
-const distDir = 'dist-rollup';
+const distDir = 'dist/rollup-app';
 
 module.exports = {
   input: 'app/main.ts',

@@ -6,7 +6,6 @@
   - [When they are used?](#when-they-are-used)
   - [How does their usually work?](#how-does-their-usually-work)
 - [Bundlers](#bundlers)
-  - [Browserify (outdated)](#browserify-outdated)
   - [ESBuild](#esbuild)
   - [Parcel](#parcel)
   - [Rollup](#rollup)
@@ -51,12 +50,6 @@ Typical config has the following properties:
   - use lifecycle hooks to inject their logic
 
 ## Bundlers
-
-### Browserify (outdated)
-- [Config example](./browserify.config.js)
-- [Documentation](https://browserify.org/)
-- Run `yarn build:browserify` to bundle the demo app.
-
 
 ### ESBuild
 - [Config example](./esbuild.config.js)

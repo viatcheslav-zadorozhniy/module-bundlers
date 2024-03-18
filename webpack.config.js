@@ -10,15 +10,15 @@ module.exports = {
   output: {
     clean: true, // Clean dist directory.
     filename: '[name].[contenthash].bundle.js',
-    path: path.resolve(__dirname, 'dist-webpack'),
+    path: path.resolve(__dirname, 'dist/webpack-app'),
   },
   resolve: { // Add support for .ts files when resolve modules w/o an extension (not supported out of the box).
-    extensions: ['.ts', '.js'],
+    extensions: ['.ts', '...'],
   },
   optimization: {
     // runtimeChunk: 'single', // Can be useful in case of multiple entry points.
     minimizer: [
-      `...`,
+      '...',
       new CssMinimizerPlugin(),
     ],
     splitChunks: {
@@ -33,6 +33,7 @@ module.exports = {
           {
             loader: 'ts-loader',
             options: {
+              // https://webpack.js.org/guides/build-performance/#typescript-loader
               transpileOnly: true // Speed up compilation by skipping static type checking.
             }
           }
@@ -65,7 +66,6 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({ // Generate an HTML file with injected CSS/JavaScript.
       template: './app/index.html',
-      minify: true,
       inject: 'body',
     }),
   ],
